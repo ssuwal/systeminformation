@@ -380,6 +380,32 @@ export namespace Systeminformation {
     remoteSession?: boolean;
   }
 
+  // Defender Data
+  interface DefenderData {
+    AMEngineVersion: string,
+    AMServiceEnabled: boolean,
+    AMServiceVersion: string,
+    AntispywareEnabled: boolean,
+    AntispywareSignatureLastUpdated: string,
+    AntispywareSignatureVersion: string,
+    AntivirusEnabled: boolean,
+    AntivirusSignatureLastUpdated: string,
+    AntivirusSignatureVersion: string,
+    BehaviorMonitorEnabled: boolean,
+    FullScanEndTime: string,
+    IoavProtectionEnabled: boolean,
+    IsTamperProtected: boolean,
+    LastFullScanSource: number,
+    LastQuickScanSource: number,
+    NISEnabled: boolean,
+    NISEngineVersion: string,
+    NISSignatureLastUpdated: string,
+    NISSignatureVersion: string,
+    OnAccessProtectionEnabled: boolean,
+    QuickScanEndTime: string,
+    RealTimeProtectionEnabled: boolean
+  }
+
   interface UuidData {
     os: string;
     hardware: string;
@@ -952,6 +978,16 @@ export namespace Systeminformation {
     wifiNetworks: WifiNetworkData;
     inetLatency: number;
   }
+  // 11. Get All Printers and Driver Version
+
+  interface PrinterDrivers {
+    DriverVersion: string;
+    MajorVersion: string;
+    Manufacturer: string;
+    Name: string;
+    provider: string;
+  }
+
 }
 
 export function version(): string;
@@ -962,9 +998,12 @@ export function chassis(cb?: (data: Systeminformation.ChassisData) => any): Prom
 
 export function time(): Systeminformation.TimeData;
 export function osInfo(cb?: (data: Systeminformation.OsData) => any): Promise<Systeminformation.OsData>;
+export function winDefender(): Promise<Systeminformation.DefenderData>;
 export function versions(apps?: string, cb?: (data: Systeminformation.VersionData) => any): Promise<Systeminformation.VersionData>;
 export function shell(cb?: (data: string) => any): Promise<string>;
 export function uuid(cb?: (data: Systeminformation.UuidData) => any): Promise<Systeminformation.UuidData>;
+// Printer Drivers
+export function printerDrivers(cb?: (data: Systeminformation.PrinterDrivers[]) => any): Promise<Systeminformation.PrinterDrivers[]>;
 
 export function cpu(cb?: (data: Systeminformation.CpuData) => any): Promise<Systeminformation.CpuData>;
 export function cpuFlags(cb?: (data: string) => any): Promise<string>;
