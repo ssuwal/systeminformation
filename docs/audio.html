@@ -45,12 +45,12 @@
       <div class="col-12 col-md-8 col-lg-9 col-xl-10 content">
         <div class="row">
           <div class="col-12 sectionheader">
-            <div class="title">Printer</div>
+            <div class="title">Audio</div>
             <div class="text">
-              <p>In this section you will learn how to get information about detected printers:</p>
+              <p>In this section you will learn how to get information about detected audio devices or interfaces. Results might differ on different platforms as not everything is available/detectable on each platform:</p>
               <p>For function reference and examples we assume, that we imported <span class="code">systeminformation</span> as follows:</p>
               <pre><code class="js">const si = require('systeminformation');</code></pre>
-              <h2>Detected Printers</h2>
+              <h2>Detected Audio Devices</h2>
               <p>All functions in this section return a promise or can be called with a callback function (parameter <span class="code">cb</span> in the function reference)</p>
               <table class="table table-sm table-bordered table-striped">
                 <thead>
@@ -67,14 +67,14 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>si.printer(cb)</td>
+                    <td>si.audio(cb)</td>
                     <td>[{...}]</td>
                     <td>X</td>
                     <td></td>
                     <td>X</td>
                     <td>X</td>
                     <td></td>
-                    <td>printer informatiom</td>
+                    <td>audio informatiom</td>
                   </tr>
                   <tr>
                     <td></td>
@@ -94,57 +94,37 @@
                     <td>X</td>
                     <td>X</td>
                     <td></td>
-                    <td>printer name</td>
+                    <td>audio name</td>
                   </tr>
                   <tr>
                     <td></td>
-                    <td>[0].model</td>
+                    <td>[0].manufacturer</td>
                     <td>X</td>
                     <td></td>
                     <td>X</td>
                     <td>X</td>
                     <td></td>
-                    <td>printer model</td>
+                    <td>manufacturer</td>
                   </tr>
                   <tr>
                     <td></td>
-                    <td>[0].uri</td>
+                    <td>[0].revision</td>
                     <td>X</td>
                     <td></td>
-                    <td>X</td>
                     <td></td>
                     <td></td>
-                    <td>printer URI</td>
+                    <td></td>
+                    <td>revision</td>
                   </tr>
                   <tr>
                     <td></td>
-                    <td>[0].uuid</td>
+                    <td>[0].driver</td>
                     <td>X</td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>printer UUID</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>[0].status</td>
-                    <td>X</td>
-                    <td></td>
-                    <td>X</td>
-                    <td>X</td>
-                    <td></td>
-                    <td>printer status (e.g. idle)</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td>[0].local</td>
-                    <td>X</td>
-                    <td></td>
-                    <td>X</td>
-                    <td>X</td>
-                    <td></td>
-                    <td>is local printer</td>
+                    <td>driver</td>
                   </tr>
                   <tr>
                     <td></td>
@@ -152,53 +132,84 @@
                     <td></td>
                     <td></td>
                     <td>X</td>
-                    <td>X</td>
                     <td></td>
-                    <td>is default printer</td>
+                    <td></td>
+                    <td>is default</td>
                   </tr>
                   <tr>
                     <td></td>
-                    <td>[0].shared</td>
+                    <td>[0].in</td>
+                    <td></td>
+                    <td></td>
+                    <td>X</td>
+                    <td></td>
+                    <td></td>
+                    <td>is input channel</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>[0].out</td>
+                    <td></td>
+                    <td></td>
+                    <td>X</td>
+                    <td></td>
+                    <td></td>
+                    <td>is output channel</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>[0].interfaceType</td>
                     <td>X</td>
                     <td></td>
                     <td>X</td>
+                    <td></td>
+                    <td></td>
+                    <td>interface type (built-in, PCI, HDMI, USB...)</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>[0].status</td>
                     <td>X</td>
                     <td></td>
-                    <td>is shared printer</td>
+                    <td>X</td>
+                    <td></td>
+                    <td></td>
+                    <td>status</td>
                   </tr>
                   <tr class="example">
                     <td></td>
                     <td colspan="7">
                       <h5>Example</h5>
                       <pre><code class="js">const si = require('systeminformation');
-si.printer().then(data => console.log(data));</code></pre class="example">
+si.audio().then(data => console.log(data));</code></pre class="example">
                       <pre class="example">
 [
   {
     id: 0,
-    name: 'HP Color LaserJet CP2025 PS',
-    model: 'HP_Color_LaserJet_CP2025',
-    uri: 'http://192.168.1.1:631/printers/HP_Color_LaserJet_CP2025',
-    uuid: null,
-    local: true,
-    status: 'idle',
-    default: false,
-    shared: false
+    name: 'MacBook Microphone',
+    manufacturer: 'Apple Inc.',
+    revision: null,
+    driver: null,
+    default: true,
+    channel: 'Built-In',
+    in: true,
+    out: false,
+    status: 'online'
   },
   {
     id: 1,
-    name: 'HP Color LaserJet CP2025 PS',
-    model: 'null',
-    uri: 'file:///dev/null',
-    uuid: null,
-    local: true,
-    status: 'idle',
+    name: 'MacBook Speaker',
+    manufacturer: 'Apple Inc.',
+    revision: null,
+    driver: null,
     default: true,
-    shared: true
+    channel: 'Built-In',
+    in: false,
+    out: true,
+    status: 'online'
   }
 ]</pre>
                   </tr>
-
                 </tbody>
               </table>
             </div>

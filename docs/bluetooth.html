@@ -45,30 +45,13 @@
       <div class="col-12 col-md-8 col-lg-9 col-xl-10 content">
         <div class="row">
           <div class="col-12 sectionheader">
-            <div class="title">Stats Functions</div>
+            <div class="title">Bluetooth</div>
             <div class="text">
-              <h2>Getting correct stats values</h2>
-
-              <p>In <span class="code">fsStats()</span>, <span class="code">disksIO()</span>, <span class="code">currentLoad()</span> and <span class="code">networkStats()</span> the
-                results / sec. values (rx_sec, IOPS, ...) are calculated correctly beginning with the <strong>second</strong> call of the function.
-                It is determined by calculating the difference of transferred bytes / IOs divided by the time between two calls of the function.</p>
-
-              <p>The first time you are calling one of this functions, you will get <span class="code">-1</span> for transfer rates.
-                The second time, you should then get statistics based on the time between the two calls ...</p>
-
-              <p>So basically, if you e.g. need a values for network stats every second, your code should look like this:</p>
-
-              <pre><code class="js">const si = require('systeminformation');
-
-setInterval(function() {
-    si.networkStats().then(data => {
-        console.log(data);
-    })
-}, 1000)</code></pre>
-              <p>Beginning with the second call, you get network transfer values per second.</p>
-              <h2>Observe System Parameters</h2>
-              <p>systeminformation now allows you to easily observe system parameters: First you define a result object of system parameters you want to observe (see also decription of the <a href="general.html"><span class="code">si.get()</span> function here</a>):</p>
-              <p>Then you just call an <span class="code">si.observe()</span> function with three parameters: your result object, the polling interval (in milliseconds) and a callback function. systeminformation will now observe the result object. Every time the result changes, your callback function is called. This callback function also gets the current value the observed system parameters object.</p>
+              <p>In this section you will learn how to get information about detected bluetooth devices. Results might differ on different platforms as not everything is available/detectable on each platform:</p>
+              <p>For function reference and examples we assume, that we imported <span class="code">systeminformation</span> as follows:</p>
+              <pre><code class="js">const si = require('systeminformation');</code></pre>
+              <h2>Detected Bluetooth Devices</h2>
+              <p>All functions in this section return a promise or can be called with a callback function (parameter <span class="code">cb</span> in the function reference)</p>
               <table class="table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
@@ -82,43 +65,129 @@ setInterval(function() {
                     <th>Comments</th>
                   </tr>
                 </thead>
-                <tr>
-                  <td>si.observe(valueObject,interval,cb)</td>
-                  <td>-</td>
-                  <td>X</td>
-                  <td>X</td>
-                  <td>X</td>
-                  <td>X</td>
-                  <td>X</td>
-                  <td>Observe the defined value object,<br>call callback on changes:</td>
-                </tr>
-                <tr class="example">
-                  <td></td>
-                  <td colspan="7">
-                    <h5>Example</h5>
-                    <pre><code class="js">const si = require('systeminformation');
-
-// define all values, you want to get back
-valueObject = {
-  battery: 'acconnected'
-}
-
-function usersCallback(data) {
-  console.log('Power usage now: ' + (data.battery.acconnected ? 'AC' : 'battery'));
-}
-
-// now define the observer function
-let observer = si.observe(valueObject, 1000, usersCallback);
-
-// In this example we stop our observer function after 30 seconds
-setTimeout(() => {
-  clearInterval(observer)
-}, 30000);</code></pre class="example">
-                              </tr>
-                              </tbody>
-                            </table>
-                            <p>The key names of the <span class="code">valueObject</span> must be exactly the same as the representing function in systeminformation.</p>
-
+                <tbody>
+                  <tr>
+                    <td>si.bluetoothDevices(cb)</td>
+                    <td>[{...}]</td>
+                    <td>X</td>
+                    <td></td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td></td>
+                    <td>bluetooth device informatiom</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>[0].device</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>X</td>
+                    <td></td>
+                    <td>device name</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>[0].name</td>
+                    <td>X</td>
+                    <td></td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td></td>
+                    <td>name</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>[0].macDevice</td>
+                    <td>X</td>
+                    <td></td>
+                    <td>X</td>
+                    <td></td>
+                    <td></td>
+                    <td>MAC address device</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>[0].macHost</td>
+                    <td>X</td>
+                    <td></td>
+                    <td>X</td>
+                    <td></td>
+                    <td></td>
+                    <td>MAC address host</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>[0].batteryPercent</td>
+                    <td></td>
+                    <td></td>
+                    <td>X</td>
+                    <td></td>
+                    <td></td>
+                    <td>battery level percent</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>[0].manufacturer</td>
+                    <td></td>
+                    <td></td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td></td>
+                    <td>manufacturer</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>[0].type</td>
+                    <td>X</td>
+                    <td></td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td></td>
+                    <td>type of device</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>[0].connected</td>
+                    <td>X</td>
+                    <td></td>
+                    <td>X</td>
+                    <td></td>
+                    <td></td>
+                    <td>connected</td>
+                  </tr>
+                  <tr class="example">
+                    <td></td>
+                    <td colspan="7">
+                      <h5>Example</h5>
+                      <pre><code class="js">const si = require('systeminformation');
+si.bluetoothDevices().then(data => console.log(data));</code></pre class="example">
+                      <pre class="example">
+[
+  {
+    device: 'Magic Mouse 2',
+    name: 'My Maus',
+    manufacturer: 'Broadcom (0x5, 0x240C)',
+    macDevice: '10-XX-XX-XX-XX-XX',
+    macHost: '20-XX-XX-XX-XX-XX',
+    batteryPercent: '74%',
+    type: 'Mouse',
+    connected: true
+  },
+  {
+    device: 'Magic Keyboard with Numeric Keypad',
+    name: 'My Keyboard',
+    manufacturer: 'Broadcom (0x5, 0x240C)',
+    macDevice: '10-XX-XX-XX-XX-XX',
+    macHost: '20-XX-XX-XX-XX-XX',
+    batteryPercent: '75%',
+    type: 'Keyboard',
+    connected: true
+  },
+]</pre>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

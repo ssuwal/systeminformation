@@ -71,7 +71,7 @@ Breaking Changes in version 4: you will see some minor breaking changes. Read th
 
 ## Quick Start
 
-Lightweight collection of 40+ functions to retrieve detailed hardware, system and OS information.
+Lightweight collection of 45+ functions to retrieve detailed hardware, system and OS information.
 
 - simple to use
 - get detailed information about system, cpu, baseboard, battery, memory, disks/filesystem, network, docker, software, services and processes
@@ -156,10 +156,11 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | | uuid | X | X | X | X |  | UUID |
 | | sku | X | X | X | X |  | SKU number |
 | | virtual | X | X |   | X |  | is virtual machine |
+| | virtualHost | X | X |   | X |  | virtual host (if virtual) |
 | | raspberry | X |   |   |   |  | optional raspberry revision data |
 | si.bios(cb) | {...} | X | X | X | X |  | bios information |
 | | vendor | X | X | X | X |  | e.g. 'AMI' |
-| | version | X | X |  | X |  | version |
+| | version | X | X | X | X |  | version |
 | | releaseDate | X | X |  | X |  | release date |
 | | revision | X | X |  | X |  | revision |
 | si.baseboard(cb) | {...} | X | X | X | X |  | baseboard information |
@@ -185,8 +186,8 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | | manufacturer | X | X | X | X |  | e.g. 'Intel(R)' |
 | | brand | X | X | X | X |  | e.g. 'Core(TM)2 Duo' |
 | | speed | X | X | X | X |  | in GHz e.g. '3.40' |
-| | speedmin | X |  | X | X |  | in GHz e.g. '0.80' |
-| | speedmax | X | X | X | X |  | in GHz e.g. '3.90' |
+| | speedMin | X |  | X | X |  | in GHz e.g. '0.80' |
+| | speedMax | X | X | X | X |  | in GHz e.g. '3.90' |
 | | governor | X | | | |  | e.g. 'powersave' |
 | | cores | X | X | X | X |  | # cores |
 | | physicalCores | X | X | X | X |  | # physical cores |
@@ -213,7 +214,7 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | | l1i | X | X | X | X |  | L1I size |
 | | l2 | X | X | X | X |  | L2 size |
 | | l3 | X | X | X | X |  | L3 size |
-| si.cpuCurrentspeed(cb) | {...} | X | X | X | X | X | current CPU speed (in GHz)|
+| si.cpuCurrentSpeed(cb) | {...} | X | X | X | X | X | current CPU speed (in GHz)|
 | | avg | X | X | X | X | X | avg CPU speed (all cores) |
 | | min | X | X | X | X | X | min CPU speed (all cores) |
 | | max | X | X | X | X | X | max CPU speed (all cores) |
@@ -258,17 +259,17 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | Function        | Result object | Linux | BSD | Mac | Win | Sun | Comments |
 | --------------- | ------------- | ----- | ------- | --- | --- | --- | -------- |
 | si.battery(cb) | {...} | X | X | X | X |  | battery information |
-| | hasbattery | X | X | X | X |  | indicates presence of battery |
-| | cyclecount | X |  | X | |  | numbers of recharges |
-| | ischarging | X | X | X | X |  | indicates if battery is charging |
-| | designedcapacity | X |  | X | X |  | max capacity of battery (mWh) |
-| | maxcapacity | X |  | X | X |  | max capacity of battery (mWh) |
-| | currentcapacity | X |  | X | X |  | current capacity of battery (mWh) |
+| | hasBattery | X | X | X | X |  | indicates presence of battery |
+| | cycleCount | X |  | X | |  | numbers of recharges |
+| | isCharging | X | X | X | X |  | indicates if battery is charging |
+| | designedCapacity | X |  | X | X |  | max capacity of battery (mWh) |
+| | maxCapacity | X |  | X | X |  | max capacity of battery (mWh) |
+| | currentCapacity | X |  | X | X |  | current capacity of battery (mWh) |
 | | capacityUnit | X |  | X | X |  | capacity unit (mWh) |
 | | voltage | X |  | X | X |  | current voltage of battery (V) |
 | | percent | X | X | X | X |  | charging level in percent |
-| | timeremaining | X |  | X |  |  | minutes left (if discharging) |
-| | acconnected | X | X | X | X |  | AC connected |
+| | timeRemaining | X |  | X |  |  | minutes left (if discharging) |
+| | acConnected | X | X | X | X |  | AC connected |
 | | type | X |  | X |  |  | battery type |
 | | model | X |  | X |  |  | model |
 | | manufacturer | X |  | X |  |  | manufacturer |
@@ -294,11 +295,11 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | | ...[0].main | X |  | X | X|  | true if main monitor |
 | | ...[0].builtin | X |  | X |  |  | true if built in monitor |
 | | ...[0].connection | X |  | X | X |  | e.g. DisplayPort or HDMI |
-| | ...[0].sizex | X |  | X | X |  | size in mm horizontal |
-| | ...[0].sizey | X |  | X | X |  | size in mm vertical |
-| | ...[0].pixeldepth | X |  | X | X |  | color depth in bits |
-| | ...[0].resolutionx | X |  | X | X |  | pixel horizontal |
-| | ...[0].resolutiony | X |  | X | X |  | pixel vertical |
+| | ...[0].sizeX | X |  | X | X |  | size in mm horizontal |
+| | ...[0].sizeY | X |  | X | X |  | size in mm vertical |
+| | ...[0].pixelDepth | X |  | X | X |  | color depth in bits |
+| | ...[0].resolutionX | X |  | X | X |  | pixel horizontal |
+| | ...[0].resolutionY | X |  | X | X |  | pixel vertical |
 | | ...[0].currentResX | X |  | X | X |  | current pixel horizontal |
 | | ...[0].currentResY | X |  | X | X |  | current pixel vertical |
 | | ...[0].positionX |  |  |  | X |  | display position X |
@@ -327,8 +328,9 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | si.uuid(cb) | {...} | X | X | X | X | X | object of several UUIDs |
 | | os | X | X | X | X |  | os specific UUID |
 | | hardware | X | X | X | X |  | hardware specific UUID |
+| | macs | X | X | X | X |  | MAC addresses |
 | si.versions(apps, cb) | {...} | X | X | X | X | X | version information (kernel, ssl, node, ...)<br />apps param is optional for detecting<br />only specific apps/libs<br />(string, comma separated) |
-| si.shell(cb) | : string | X | X | X |  |  | standard shell |
+| si.shell(cb) | : string | X | X | X | X |  | standard shell |
 | si.users(cb) | [{...}] | X | X | X | X | X | array of users online |
 | | [0].user | X | X | X | X | X | user name |
 | | [0].tty | X | X | X | X | X | terminal |
@@ -342,14 +344,14 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | Function        | Result object | Linux | BSD | Mac | Win | Sun | Comments |
 | --------------- | ------------- | ----- | ------- | --- | --- | --- | -------- |
 | si.currentLoad(cb) | {...} | X |  | X | X | X | CPU-Load |
-| | avgload | X |  | X | | X | average load  |
-| | currentload | X |  | X | X | X | CPU load in % |
-| | currentload_user | X |  | X | X | X | CPU load user in % |
-| | currentload_system | X |  | X | X | X | CPU load system in % |
-| | currentload_nice | X |  | X | X | X | CPU load nice in % |
-| | currentload_idle | X |  | X | X | X | CPU load idle in % |
-| | currentload_irq | X |  | X | X | X | CPU load system in % |
-| | raw_currentload... | X |  | X | X | X | CPU load raw values (ticks) |
+| | avgLoad | X |  | X | | X | average load  |
+| | currentLoad | X |  | X | X | X | CPU load in % |
+| | currentLoadUser | X |  | X | X | X | CPU load user in % |
+| | currentLoadSystem | X |  | X | X | X | CPU load system in % |
+| | currentLoadNice | X |  | X | X | X | CPU load nice in % |
+| | currentLoadIdle | X |  | X | X | X | CPU load idle in % |
+| | currentLoadIrq | X |  | X | X | X | CPU load system in % |
+| | rawCurrentLoad... | X |  | X | X | X | CPU load raw values (ticks) |
 | | cpus[] | X |  | X | X | X | current loads per CPU in % + raw ticks |
 | si.fullLoad(cb) | : integer | X |  | X | X |  | CPU full load since bootup in % |
 | si.processes(cb) | {...} | X | X | X | X | X | # running processes |
@@ -367,8 +369,8 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | | ...[0].pcpus | X | X |  | X |   | process % CPU usage (system) |
 | | ...[0].pmem | X | X | X | X | X | process memory % |
 | | ...[0].priority | X | X | X | X | X | process priotity |
-| | ...[0].mem_vsz | X | X | X | X | X | process virtual memory size |
-| | ...[0].mem_rss | X | X | X | X | X | process mem resident set size |
+| | ...[0].memVsz | X | X | X | X | X | process virtual memory size |
+| | ...[0].memRss | X | X | X | X | X | process mem resident set size |
 | | ...[0].nice | X | X | X |  | X | process nice value |
 | | ...[0].started | X | X | X | X | X | process start time |
 | | ...[0].state | X | X | X | X | X | process state (e.g. sleeping) |
@@ -387,8 +389,13 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | | [0].running | X | X | X | X |  | true / false |
 | | [0].startmode |   |   |   | X |  | manual, automatic, ... |
 | | [0].pids | X | X | X | X |  | pids |
-| | [0].pcpu | X | X | X |  |  | process % CPU |
-| | [0].pmem | X | X | X |  |  | process % MEM |
+| | [0].cpu | X | X | X |  |  | process % CPU |
+| | [0].mem | X | X | X |  |  | process % MEM |
+| si.processLoad('mysql, apache2', cb) | [{...}] | X | X | X | X |  | pass comma separated string of processes<br>pass "*" for ALL processes (linux/win only) |
+| | [0].proc | X | X | X | X |  | name of process |
+| | [0].pids | X | X | X | X |  | pids |
+| | [0].cpu | X | X | X |  |  | process % CPU |
+| | [0].mem | X | X | X |  |  | process % MEM |
 
 #### 9. File System
 
@@ -453,7 +460,24 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | | tx_sec | X |  | X |  |  | total bytes reads + written / second  |
 | | ms | X |  | X |  |  | interval length (for per second values) |
 
-#### 10. File System
+#### 10. USB
+
+| Function        | Result object | Linux | BSD | Mac | Win | Sun | Comments |
+| --------------- | ------------- | ----- | ------- | --- | --- | --- | -------- |
+| si.usb(cb) | [{...}] | X | X | X | X |  | get detected USB devices |
+| | [0].bus | X |  |   |  |  | USB bus |
+| | [0].deviceId | X |  |   |  |  | bus device id |
+| | [0].id | X |  | X | X |  | internal id |
+| | [0].name | X |  | X | X |  | name |
+| | [0].type | X |  | X | X |  | name |
+| | [0].removable |  |  | X |  |  | is removable |
+| | [0].vendor | X |  | X |  |  | vendor |
+| | [0].manufacturer | X |  | X | X |  | manifacturer |
+| | [0].maxPower | X |  |   |  |  | max power |
+| | [0].default | X |  | X | X |  | is default printer |
+| | [0].serialNumber |  |  | X |  |  | serial number |
+
+#### 11. Printer
 
 | Function        | Result object | Linux | BSD | Mac | Win | Sun | Comments |
 | --------------- | ------------- | ----- | ------- | --- | --- | --- | -------- |
@@ -461,14 +485,30 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | | [0].id | X |  | X | X |  | internal id |
 | | [0].name | X |  | X | X |  | name |
 | | [0].model | X |  | X | X |  | model |
-| | [0].uri | X |  | X | X |  | printer URI |
-| | [0].uuid | X |  | X | X |  | printer UUID |
+| | [0].uri | X |  | X |  |  | printer URI |
+| | [0].uuid | X |  |   |   |  | printer UUID |
 | | [0].status | X |  | X | X |  | printer status (e.g. idle) |
 | | [0].local | X |  | X | X |  | is local printer |
-| | [0].default | X |  | X | X |  | is default printer |
+| | [0].default |   |  | X | X |  | is default printer |
 | | [0].shared | X |  | X | X |  | is shared printer |
 
-#### 11. Network related functions
+#### 12. Audio
+
+| Function        | Result object | Linux | BSD | Mac | Win | Sun | Comments |
+| --------------- | ------------- | ----- | ------- | --- | --- | --- | -------- |
+| si.audio(cb) | [{...}] | X | X | X | X |  | get printer information |
+| | [0].id            | X |  | X | X |  | internal id |
+| | [0].name          | X |  | X | X |  | name |
+| | [0].manufacturer  | X |  | X | X |  | manufacturer |
+| | [0].revision      | X |  |   |   |  | revision |
+| | [0].driver        | X |  |   |   |  | driver |
+| | [0].default       |   |  | X | X |  | is default |
+| | [0].in            |   |  | X | X |  | is input channel |
+| | [0].out           |   |  | X | X |  | is output channel |
+| | [0].interfaceType | X |  | X | X |  | interface type (PCIe, USB, HDMI, ...) |
+| | [0].status        | X |  | X | X |  | printer status (e.g. idle) |
+
+#### 13. Network related functions
 
 | Function        | Result object | Linux | BSD | Mac | Win | Sun | Comments |
 | --------------- | ------------- | ----- | ------- | --- | --- | --- | -------- |
@@ -508,10 +548,10 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | | [0].ms | X | X | X | X |  | interval length (for per second values) |
 | si.networkConnections(cb) | [{...}] | X | X | X | X |  | current network network connections<br>returns an array of all connections|
 | | [0].protocol | X | X | X | X |  | tcp or udp |
-| | [0].localaddress | X | X | X | X |  | local address |
-| | [0].localport | X | X | X | X |  | local port |
-| | [0].peeraddress | X | X | X | X |  | peer address |
-| | [0].peerport | X | X | X | X |  | peer port |
+| | [0].localAddress | X | X | X | X |  | local address |
+| | [0].localPort | X | X | X | X |  | local port |
+| | [0].peerAddress | X | X | X | X |  | peer address |
+| | [0].peerPort | X | X | X | X |  | peer port |
 | | [0].state | X | X | X | X |  | like ESTABLISHED, TIME_WAIT, ... |
 | | [0].pid | X | X | X | X |  | process ID |
 | | [0].process | X | X |  |  |  | process name |
@@ -522,7 +562,8 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | | ms | X | X | X | X | X | response time in ms |
 | si.inetLatency(host, cb) | : number | X | X | X | X | X | response-time (ms) to external resource<br>host parameter is optional (default 8.8.8.8)|
 
-#### 12. Wifi networks
+#### 14. Wifi networks
+
 | Function        | Result object | Linux | BSD | Mac | Win | Sun | Comments |
 | --------------- | ------------- | ----- | ------- | --- | --- | --- | -------- |
 | si.wifiNetworks(cb) | [{...}] | X |  | X | X |  | array of available wifi networks |
@@ -537,7 +578,21 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | | [0].wpaFlags | X |  | X | X |   | array of WPA flags |
 | | [0].rsnFlags | X |  |  |   |   | array of RDN flags |
 
-#### 13. Docker
+#### 15. Bluetooth
+
+| Function        | Result object | Linux | BSD | Mac | Win | Sun | Comments |
+| --------------- | ------------- | ----- | ------- | --- | --- | --- | -------- |
+| si.bluetoothDevices(cb) | [{...}] | X |  | X | X |  | ... |
+| | [0].device         |   |  | X |   |   | device name |
+| | [0].name           | X |  | X | X |   | name |
+| | [0].macDevice      | X |  | X |   |   | MAC address device |
+| | [0].macHost        | X |  | X |   |   | MAC address host |
+| | [0].batteryPercent |   |  | X |   |   | battery level percent |
+| | [0].manufacturer   |   |  | X | X |   | manufacturer |
+| | [0].type           | X |  | X | X |   | typoe of bluetooth device |
+| | [0].connected      | X |  | X |   |   | is connected |
+
+#### 16. Docker
 
 | Function        | Result object | Linux | BSD | Mac | Win | Sun | Comments |
 | --------------- | ------------- | ----- | ------- | --- | --- | --- | -------- |
@@ -605,21 +660,21 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | | [0].mounts | X | X | X | X | X | array of mounts |
 | si.dockerContainerStats(ids, cb) | [{...}] | X | X | X | X | X | statistics for specific containers<br>container IDs: space or comma separated,<br>pass '*' for all containers|
 | | [0].id | X | X | X | X | X | Container ID |
-| | [0].mem_usage | X | X | X | X | X | memory usage in bytes |
-| | [0].mem_limit | X | X | X | X | X | memory limit (max mem) in bytes |
-| | [0].mem_percent | X | X | X | X | X | memory usage in percent |
-| | [0].cpu_percent | X | X | X | X | X | cpu usage in percent |
+| | [0].memUsage | X | X | X | X | X | memory usage in bytes |
+| | [0].memLimit | X | X | X | X | X | memory limit (max mem) in bytes |
+| | [0].memPercent | X | X | X | X | X | memory usage in percent |
+| | [0].cpuPercent | X | X | X | X | X | cpu usage in percent |
 | | [0].pids | X | X | X | X | X | number of processes |
 | | [0].netIO.rx | X | X | X | X | X | received bytes via network |
 | | [0].netIO.wx | X | X | X | X | X | sent bytes via network |
 | | [0].blockIO.r | X | X | X | X | X | bytes read from BlockIO |
 | | [0].blockIO.w | X | X | X | X | X | bytes written to BlockIO |
-| | [0].cpu_stats | X | X | X | X | X | detailed cpu stats |
-| | [0].percpu_stats | X | X | X | X | X | detailed per cpu stats |
-| | [0].memory_stats | X | X | X | X | X | detailed memory stats |
+| | [0].cpuStats | X | X | X | X | X | detailed cpu stats |
+| | [0].percpuStats | X | X | X | X | X | detailed per cpu stats |
+| | [0].memoryStats | X | X | X | X | X | detailed memory stats |
 | | [0].networks | X | X | X | X | X | detailed network stats per interface |
 | si.dockerContainerProcesses(id, cb) | [{...}] | X | X | X | X | X | array of processes inside a container |
-| | [0].pid_host | X | X | X | X | X | process ID (host) |
+| | [0].pidHost | X | X | X | X | X | process ID (host) |
 | | [0].ppid | X | X | X | X | X | parent process ID |
 | | [0].pgid | X | X | X | X | X | process group ID |
 | | [0].user | X | X | X | X | X | effective user name |
@@ -635,7 +690,7 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | | [0].command | X | X | X | X | X | command and arguments |
 | si.dockerAll(cb) | {...} | X | X | X | X | X | list of all containers including their stats<br>and processes in one single array |
 
-#### 14. Virtual Box
+#### 17. Virtual Box
 
 | Function        | Result object | Linux | BSD | Mac | Win | Sun | Comments |
 | --------------- | ------------- | ----- | ------- | --- | --- | --- | -------- |
@@ -660,24 +715,24 @@ I also created a nice little command line tool called [mmon][mmon-github-url] (m
 | | [0].configFile | X | X | X | X | X | config file |
 | | [0].snapshotFolder | X | X | X | X | X | snapshot folder |
 | | [0].logFolder | X | X | X | X | X | log folder path |
-| | [0].HPET | X | X | X | X | X | HPET |
-| | [0].PAE | X | X | X | X | X | PAE |
+| | [0].hpet | X | X | X | X | X | HPET |
+| | [0].pae | X | X | X | X | X | PAE |
 | | [0].longMode | X | X | X | X | X | long mode |
 | | [0].tripleFaultReset | X | X | X | X | X | triple fault reset |
-| | [0].APIC | X | X | X | X | X | APIC |
-| | [0].X2APIC | X | X | X | X | X | X2APIC |
-| | [0].ACPI | X | X | X | X | X | ACPI |
-| | [0].IOAPIC | X | X | X | X | X | IOAPIC |
-| | [0].biosAPICmode | X | X | X | X | X | BIOS APIC mode |
+| | [0].apic | X | X | X | X | X | APIC |
+| | [0].x2Apic | X | X | X | X | X | X2APIC |
+| | [0].acpi | X | X | X | X | X | ACPI |
+| | [0].ioApic | X | X | X | X | X | IOAPIC |
+| | [0].biosApicMode | X | X | X | X | X | BIOS APIC mode |
 | | [0].bootMenuMode | X | X | X | X | X | boot menu Mode |
 | | [0].bootDevice1 | X | X | X | X | X | bootDevice1 |
 | | [0].bootDevice2 | X | X | X | X | X | bootDevice2 |
 | | [0].bootDevice3 | X | X | X | X | X | bootDevice3 |
 | | [0].bootDevice4 | X | X | X | X | X | bootDevice4 |
 | | [0].timeOffset | X | X | X | X | X | time Offset |
-| | [0].RTC | X | X | X | X | X | RTC |
+| | [0].rtc | X | X | X | X | X | RTC |
 
-#### 14. "Get All / Observe" - functions
+#### 16. "Get All / Observe" - functions
 
 | Function        | Result object | Linux | BSD | Mac | Win | Sun | Comments |
 | --------------- | ------------- | ----- | ------- | --- | --- | --- | -------- |
@@ -864,7 +919,8 @@ Ubuntu is a trademark of Canonical Ltd., FreeBSD is a registered trademark of Th
 NetBSD is a registered trademark of The NetBSD Foundation, Docker is a trademark of Docker, Inc., Sun,
 Solaris, OpenSolaris and registered trademarks of Sun Microsystems, VMware is a trademark of VMware Inc,
 Virtual Box is a trademark of Oracle Corporation, Xen is a registered trademark of Xen Project,
-QEMU is a trademark of Fabrice Bellard, bochs is a trademark of The Bochs Project.
+QEMU is a trademark of Fabrice Bellard, bochs is a trademark of The Bochs Project, USB and USB Logo
+are trademarks of USB Implementation Forum, Bluetooth and Bluetooth Logo are trademarks of Bluetooth SIG.
 
 All other trademarks are the property of their respective owners.
 
