@@ -1,7 +1,7 @@
 {
   "name": "systeminformation",
-  "version": "4.34.5",
-  "description": "Simple system and OS information library",
+  "version": "5.23.5",
+  "description": "Advanced, lightweight system and OS information library",
   "license": "MIT",
   "author": "Sebastian Hildebrandt <hildebrandt@plus-innovations.com> (https://plus-innovations.com)",
   "homepage": "https://systeminformation.io",
@@ -11,12 +11,7 @@
   },
   "types": "./lib/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist",
-    "test-bare": "npm run compile && mocha ./test/**/*.test.js",
-    "compile": "tsc",
-    "watch": "tsc -w",
-    "test": "nyc mocha --require ts-node/register --require source-map-support/register  ./test/**/*.test.ts",
-    "coverage": "nyc report --reporter=text-lcov"
+    "test": "node ./test/test.js"
   },
   "files": [
     "lib/"
@@ -52,6 +47,7 @@
     "network connections",
     "network stats",
     "iface",
+    "printer",
     "processes",
     "users",
     "internet",
@@ -66,11 +62,18 @@
     "display",
     "smart",
     "disk layout",
+    "usb",
+    "audio",
+    "bluetooth",
     "wifi",
     "wifinetworks",
     "virtual box",
     "virtualbox",
-    "vm"
+    "vm",
+    "backend",
+    "hardware",
+    "BIOS",
+    "chassis"
   ],
   "repository": {
     "type": "git",
@@ -87,38 +90,10 @@
     "freebsd",
     "openbsd",
     "netbsd",
-    "sunos"
+    "sunos",
+    "android"
   ],
   "engines": {
-    "node": ">=4.0.0"
-  },
-  "devDependencies": {
-    "@types/chai": "^4.1.7",
-    "@types/mocha": "^5.2.5",
-    "@types/node": "^10.12.18",
-    "chai": "^4.2.0",
-    "coveralls": "^3.0.2",
-    "mocha": "^5.2.0",
-    "nyc": "^13.1.0",
-    "rimraf": "^2.6.2",
-    "source-map-support": "^0.5.9",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.2.2"
-  },
-  "nyc": {
-    "extension": [
-      ".js"
-    ],
-    "include": [
-      "lib/**"
-    ],
-    "exclude": [
-      "**/*.d.ts"
-    ],
-    "reporter": [
-      "html",
-      "text"
-    ],
-    "all": true
+    "node": ">=8.0.0"
   }
 }
